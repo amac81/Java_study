@@ -1,9 +1,0 @@
-/**
- * 
- */
-/**
- * @author arnaldocanelas
- *
- */
-module JavaProgrammingCourse {
-}
