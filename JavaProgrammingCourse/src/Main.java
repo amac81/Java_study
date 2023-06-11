@@ -58,8 +58,7 @@ public class Main {
 		System.out.println("S2: " + s2);
 		System.out.println("S3: " + s3);
 		
-		
-
+		sc.close();
 	}
 
 }
