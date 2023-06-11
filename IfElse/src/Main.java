@@ -25,6 +25,14 @@ public class Main {
 		} else {
 			System.out.printf("The number %d is NEGATIVE%n%n", x);
 		}
+		
+		/* the previous example could be done using the java ternary operator
+		 * the logical test would be done like this:
+		 * 
+		 * String result = (x>=0) ? "POSITIVE" : "NEGATIVE";	
+		 * System.out.printf("The number %d is %s%n%n", x, result);
+	    */
+
 
 		System.out.printf("# EVEND or ODD #%n%n");
 
