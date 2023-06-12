@@ -52,7 +52,7 @@ public class Main {
 		/*
 		 * for(begin; condition; increment) {}: use when we previously know the number of repetitions 
 		 * if condition result = true: execute code inside {} and repeat 
-		 * if condition result = false: exit {}
+		 * if condition result = false: exit/does not enter {}
 		 */
 		
 		//example: repeat the sum of values, entered by user, the N times the user decided before. At the end it shows the sum on the screen
