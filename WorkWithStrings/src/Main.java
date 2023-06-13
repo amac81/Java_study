@@ -61,6 +61,21 @@ public class Main {
 		System.out.printf("The last occurrence of the char sequence \"ng\" in the string \"%s\" is at position %d%n",
 				strOriginal, strOriginal.lastIndexOf("ng"));
 
+		/*
+		 * The method split() splits a String into multiple Strings given the delimiter
+		 * that separates them. The returned object is an array which contains the split
+		 * Strings.
+		 */
+		System.out.println("\nSPLIT FUNCTION\n");
+
+		String[] strVect = strOriginal.split(" ");
+
+		int strLength = strVect.length;
+
+		for (int i = 0; i < strLength; i++) {
+			System.out.printf("String at index %d = \"%s\"%n", i, strVect[i]);
+		}
+
 	}
 
 }
