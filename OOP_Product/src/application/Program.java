@@ -24,7 +24,7 @@ public class Program {
 		 * attributes.
 		 * 
 		 * For example, in the case of the Product class, it makes no sense to have an
-		 * object of type Product (an instance) empty (no name, no price, no quantity)
+		 * object of type Product (an instance) with no name / no price)
 		 */
 		Product product = new Product(productName, productPrice, quantity);
 
