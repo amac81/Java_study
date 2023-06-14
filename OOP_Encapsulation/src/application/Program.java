@@ -20,30 +20,34 @@ public class Program {
 		double weight = sc.nextDouble();
 		System.out.print("Age: ");
 		int age = sc.nextInt();
-		System.out.print("Email: ");
-		sc.nextLine(); // clean buffer
-		String email = sc.nextLine();
+		
+		Person person1 = new Person(name, height, weight, age);
 
-		Person person1 = new Person(name, height, weight, age, email);
-
-		System.out.print("\nPerson Data:" + person1.toString()); 
+		System.out.print("\nPerson Data:" + person1.toString());
 
 		System.out.println("\n\n######## SHOW DATA OF PERSON #########:\n");
 
 		System.out.print("Name: " + person1.getName());
 		System.out.print("\nAge: " + person1.getAge());
 
-		System.out.println("\n######## CHANGE DATA OF PERSON #########:\n\n");
+		System.out.println("\n\n######## CHANGE DATA OF PERSON #########:\n");
 
 		System.out.println("Enter Person data to UPDATE:\n");
 		System.out.print("Name: ");
+		sc.nextLine(); // clear buffer
 		name = sc.nextLine();
 		person1.setName(name);
 
-		System.out.print("Email: ");
-		email = sc.nextLine();
-		person1.setEmail(email);
+		person1.birthday();
+		System.out.println("\nNew Age: " + person1.getAge());
 		
+		person1.increaseWeight(2.0);
+		System.out.println("\nNew weight: " + person1.getWeight());
+		
+
+		person1.decreaseWeight(0.5);
+		System.out.println("\nNew weight: " + person1.getWeight());		
+
 		System.out.print("\nPerson Data:" + person1.toString());
 
 		sc.close();

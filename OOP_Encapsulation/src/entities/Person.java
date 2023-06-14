@@ -22,17 +22,8 @@ public class Person {
 	private Double height;
 	private Double weight;
 	private int age;
-	private String email;
-	
-	public Person() {}
-	
-	public Person(String name, Double height, Double weight, int age, String email) {
-		super();
-		this.name = name;
-		this.height = height;
-		this.weight = weight;
-		this.age = age;
-		this.email = email;
+
+	public Person() {
 	}
 
 	public Person(String name, Double height, Double weight, int age) {
@@ -55,38 +46,29 @@ public class Person {
 		return height;
 	}
 
-	public void setHeight(Double height) {
-		this.height = height;
-	}
-
 	public Double getWeight() {
 		return weight;
-	}
-
-	public void setWeight(Double weight) {
-		this.weight = weight;
 	}
 
 	public int getAge() {
 		return age;
 	}
 
-	public void setAge(int age) {
-		this.age = age;
+	public int birthday() {
+		return age ++;
 	}
 
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
+	public double increaseWeight(double weightDif) {
+		return weight += weightDif;
 	}
 	
-	public String toString() {
-		return "[name=" + name + ", height=" + height + ", weight=" + weight + ", age=" + age + ", email="
-				+ email + "]";
+	public double decreaseWeight(double weightDif) {
+		return weight -= weightDif;
 	}
-
+	
+	
+	public String toString() {
+		return "[name=" + name + ", height=" + height + ", weight=" + weight + ", age=" + age + "]";
+	}
 
 }
