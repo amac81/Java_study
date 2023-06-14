@@ -6,7 +6,17 @@ public class Product {
 	public int quantity;
 	
 	
-	//Class Product Constructor
+	//Class Product Constructors
+	//Constructor Overloading in Java
+
+	public Product() {}	
+
+	public Product(String name, double price) {
+		this.name = name;
+		this.price = price;		
+		//this.quantity = 0; or quantity = 0; optional
+	}
+	
 	public Product(String name, double price, int quantity) {
 		this.name = name;
 		this.price = price;

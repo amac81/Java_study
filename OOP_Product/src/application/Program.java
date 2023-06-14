@@ -16,9 +16,6 @@ public class Program {
 		String productName = sc.nextLine();
 		System.out.print("Price: ");
 		double productPrice = sc.nextDouble();
-		System.out.print("Quantity in stock: ");
-		int quantity = sc.nextInt();
-
 		/*
 		 * using the constructor forces the programmer to initialize the object's
 		 * attributes.
@@ -26,13 +23,13 @@ public class Program {
 		 * For example, in the case of the Product class, it makes no sense to have an
 		 * object of type Product (an instance) with no name / no price)
 		 */
-		Product product = new Product(productName, productPrice, quantity);
+		Product product = new Product(productName, productPrice);
 
 		System.out.print("\nProduct Data:" + product.toString()); // toString() can be omitted
 
 		System.out.println("\n");
 		System.out.print("Enter the number of products to be added to stock: ");
-		quantity = sc.nextInt();
+		int quantity = sc.nextInt();
 		product.AddProducts(quantity);
 		System.out.print("Updated Data:" + product.toString()); // toString() can be omitted
 
