@@ -11,21 +11,28 @@ public class Program {
 
 		Scanner sc = new Scanner(System.in);
 
-		Product product = new Product();
-
 		System.out.println("Enter Product data:\n");
 		System.out.print("Name: ");
-		product.name = sc.nextLine();
+		String productName = sc.nextLine();
 		System.out.print("Price: ");
-		product.price = sc.nextDouble();
+		double productPrice = sc.nextDouble();
 		System.out.print("Quantity in stock: ");
-		product.quantity = sc.nextInt();
+		int quantity = sc.nextInt();
+
+		/*
+		 * using the constructor forces the programmer to initialize the object's
+		 * attributes.
+		 * 
+		 * For example, in the case of the Product class, it makes no sense to have an
+		 * object of type Product (an instance) empty (no name, no price, no quantity)
+		 */
+		Product product = new Product(productName, productPrice, quantity);
 
 		System.out.print("\nProduct Data:" + product.toString()); // toString() can be omitted
 
 		System.out.println("\n");
 		System.out.print("Enter the number of products to be added to stock: ");
-		int quantity = sc.nextInt();
+		quantity = sc.nextInt();
 		product.AddProducts(quantity);
 		System.out.print("Updated Data:" + product.toString()); // toString() can be omitted
 
