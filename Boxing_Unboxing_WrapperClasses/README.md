@@ -5,6 +5,7 @@ Process of converting a value type "object" to a compatible reference type objec
 
 Example:
 int x = 20;
+
 Object obj = y;
 
 ![Boxing](https://github.com/amac81/Java_study/assets/92024910/4f682020-423d-4fd7-90c1-d5a6099d21e7)
