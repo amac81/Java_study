@@ -37,10 +37,15 @@ Wrapper classes are "equivalent" classes to primitive types
 Example:
 
 public class Car {
+
 	private String brand; 
+ 
 	private Double price; 
+ 
 	private Integer quantity;	
+ 
 	(...)
+ 
 }
 
 ![JavaWrapperClasses](https://github.com/amac81/Java_study/assets/92024910/44f8a5e6-ac6e-4395-86a0-6c88f27236ea)
