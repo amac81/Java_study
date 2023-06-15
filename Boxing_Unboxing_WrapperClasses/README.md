@@ -19,6 +19,7 @@ Process of converting an object reference type to an "object" compatible value t
 Example:
 
 int x = 20;
+
 Object obj = x;
 
 int y = (int) obj; //type casting
