@@ -28,6 +28,14 @@ int y = (int) obj; //type casting
 
 # Wrapper classes
 
-![JavaWrapperClasses](https://github.com/amac81/Java_study/assets/92024910/a04b31d4-ec4f-42b5-a018-859d1b7f385c)
+Wrapper classes are "equivalent" classes to primitive types
+
+- Allow Boxing and Unboxing to be natural in the language
+
+- Common usage: entity fields in information systems; reference types (classes) accept null values and take advantage of OO features.
+
+![JavaWrapperClasses](https://github.com/amac81/Java_study/assets/92024910/44f8a5e6-ac6e-4395-86a0-6c88f27236ea)
+
+
 source: https://www.udemy.com/course/java-curso-completo/learn/lecture/10566116#overview
 
