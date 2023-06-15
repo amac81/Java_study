@@ -24,6 +24,8 @@ Object obj = x;
 
 int y = (int) obj; //type casting
 
+![Unboxing](https://github.com/amac81/Java_study/assets/92024910/a32b9e1e-8ff8-44fc-9d4f-84df24d197b5)
+
 # Wrapper classes
 
 ![JavaWrapperClasses](https://github.com/amac81/Java_study/assets/92024910/a04b31d4-ec4f-42b5-a018-859d1b7f385c)
