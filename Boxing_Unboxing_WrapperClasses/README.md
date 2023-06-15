@@ -5,6 +5,7 @@
 Process of converting a value type "object" to a compatible reference type object.
 
 Example:
+
 int x = 20;
 
 Object obj = x;
@@ -16,6 +17,7 @@ Object obj = x;
 Process of converting an object reference type to an "object" compatible value type.
 
 Example:
+
 int x = 20;
 Object obj = x;
 
