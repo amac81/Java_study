@@ -7,9 +7,13 @@ Process of converting a value type "object" to a compatible reference type objec
 Example:
 int x = 20;
 
-Object obj = y;
+Object obj = x;
 
 ![Boxing](https://github.com/amac81/Java_study/assets/92024910/9921ed1f-5ae2-4a24-a4e7-932054bc7c05)
+
+# Unboxing 
+
+Process of converting a value type "object" to a compatible reference type object.
 
 
 ![JavaWrapperClasses](https://github.com/amac81/Java_study/assets/92024910/a04b31d4-ec4f-42b5-a018-859d1b7f385c)
