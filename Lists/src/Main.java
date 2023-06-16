@@ -65,7 +65,7 @@ public class Main {
 
 		System.out.println("---------------------------------------");
 
-		// find a element starting with 'A' and after starting with 'J'
+		// find a element starting with 'A' and after starting with 'J' (using a predicate)
 		// returns null if not found
 
 		String name = list.stream().filter(x -> x.charAt(0) == 'A').findFirst().orElse(null);
