@@ -46,16 +46,15 @@ public class Main {
 		 * want to filter the list so that only the elements starting with 'A' are kept
 		 * 
 		 * We have to: 
-		 * 	- create a new list; 
-		 *  - convert the original list to stream; 
-		 *  - filter with lambda operations; 
-		 *  - convert to list again;
+		 * - create a new list; 
+		 * - convert the original list to stream; 
+		 * - filter with lambda operations; 
+		 * - convert to list again;
 		 *
 		 * from Java version 8: solution adopted to maintain compatibility between List
 		 * (old type) and allow the use of Lambda operations
 		 */
 
-		//
 		List<String> result = list.stream().filter(x -> x.charAt(0) == 'A').collect(Collectors.toList());
 
 		System.out.println("---------------------------------------");
@@ -63,6 +62,17 @@ public class Main {
 		for (String str : result) {
 			System.out.println(str);
 		}
+
+		System.out.println("---------------------------------------");
+
+		// find a element starting with 'A' and after starting with 'J'
+		// returns null if not found
+
+		String name = list.stream().filter(x -> x.charAt(0) == 'A').findFirst().orElse(null);
+		System.out.println(name);
+
+		name = list.stream().filter(x -> x.charAt(0) == 'J').findFirst().orElse(null);
+		System.out.println(name);
 
 	}
 }
