@@ -9,8 +9,7 @@ import java.time.temporal.ChronoUnit;
 public class Main {
 
 	public static void main(String[] args) {
-		
-		
+				
 		/* ISO 8601 standard
 		 * 
 		 * Local Date/Hour
@@ -147,7 +146,6 @@ public class Main {
 		Duration t1 = Duration.between(date4.atStartOfDay(), nextWeekLocalDate.atStartOfDay()); //atStartOfDay() needed because date4 and nextWeekLocalDate are LocalDate
 		Duration t2 = Duration.between(minusDaysLocalDateTime, date5);
 		Duration t3 = Duration.between(date3, pastWeekInstant);
-		
 		
 		System.out.println("t1 = " + t1.toDays());
 		System.out.println("t2 = " + t2.toDays());
