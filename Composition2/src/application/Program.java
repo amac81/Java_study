@@ -18,8 +18,7 @@ public class Program {
 		Scanner sc = new Scanner(System.in);
 
 		DateTimeFormatter dateFormat1 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-		DateTimeFormatter dateFormat2 = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
-
+	
 		System.out.println("\nEnter Client Data");
 		System.out.print("Name: ");
 		String clientName = sc.nextLine();
@@ -60,27 +59,7 @@ public class Program {
 
 		System.out.println();
 
-		StringBuilder orderSummary = new StringBuilder();
-
-		orderSummary.append("ORDER SUMMARY:\n");
-		orderSummary.append("Order moment: " + dateFormat2.format(order.getMoment()) + "\n");
-		orderSummary.append("Order status: " + order.getStatus());
-		orderSummary.append("\nCLIENT: " + order.getClient().getName());
-		orderSummary.append(" (" + dateFormat1.format(order.getClient().getBirthDate()) + ") - " + order.getClient().getEmail());
-		orderSummary.append("\nORDER ITEMS:\n");
-
-		for (OrderItem oi : order.getItems()) {
-			Product p = oi.getProduct();
-			orderSummary.append(p.getName() 
-					+ "| Price: $" + p.getPrice() 
-					+ "| Discount: $" + oi.getDiscount()
-					+ "| Quantity: " + oi.getQuantity() 
-					+ "| SubTotal: $" + oi.subTotal() + "\n");
-		}
-
-		orderSummary.append("\nTotal price: $" + order.total() + "\n");
-
-		System.out.print(orderSummary);
+		System.out.print(order);
 		sc.close();
 	}
 

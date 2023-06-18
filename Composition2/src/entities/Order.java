@@ -1,12 +1,16 @@
 package entities;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
 import entities.enums.OrderStatus;
 
 public class Order {
+	private static DateTimeFormatter dateFormat1 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+	private static DateTimeFormatter dateFormat2 = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+
 	private LocalDateTime moment;
 	private OrderStatus status;
 	private Client client;
@@ -66,6 +70,28 @@ public class Order {
 			sum += oi.subTotal();
 		}
 		return sum;
+	}
+	
+	public String toString() {
+		StringBuilder orderSummary = new StringBuilder();
+
+		orderSummary.append("ORDER SUMMARY:\n");
+		orderSummary.append("Order moment: " + dateFormat2.format(moment) + "\n");
+		orderSummary.append("Order status: " + status);
+		orderSummary.append("\nCLIENT: " + client.getName());
+		orderSummary.append(" (" + dateFormat1.format(client.getBirthDate()) + ") - " + client.getEmail());
+		orderSummary.append("\nORDER ITEMS:\n");
+
+		for (OrderItem oi : items) {
+			Product p = oi.getProduct();
+			orderSummary.append(p.getName() 
+					+ "| Price: $" + p.getPrice() 
+					+ "| Discount: $" + oi.getDiscount()
+					+ "| Quantity: " + oi.getQuantity() 
+					+ "| SubTotal: $" + oi.subTotal() + "\n");
+		}
+
+		return orderSummary.append("\nTotal price: $" + total() + "\n").toString();
 	}
 
 }
