@@ -1,2 +1,2 @@
 # Java_study
-My Repository for Java exercises and small projects
+1st Repository for Java exercises and small projects
