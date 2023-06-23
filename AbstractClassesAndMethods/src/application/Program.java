@@ -65,13 +65,12 @@ public class Program {
 		Double totalCollectedTaxes = 0.0;
 
 		for (TaxPayer c : contributors) {
-			System.out.printf(c.getName(), " :", c.totalTaxesToPay(), " €");
+			System.out.printf("%s : %.2f €%n", c.getName(), c.totalTaxesToPay());
 			totalCollectedTaxes += c.totalTaxesToPay();
-			System.out.println();
 		}
 		
 		System.out.println();
-		System.out.printf("Total Collected Taxes: %.2f", totalCollectedTaxes);		
+		System.out.printf("TOTAL COLLECTED TAXES: %.2f €", totalCollectedTaxes);		
 
 		sc.close();
 	}
