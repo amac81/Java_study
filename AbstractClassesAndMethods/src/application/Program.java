@@ -6,8 +6,8 @@ import java.util.Locale;
 import java.util.Scanner;
 
 import entities.Company;
-import entities.Contributor;
-import entities.NaturalPerson;
+import entities.TaxPayer;
+import entities.Individual;
 
 public class Program {
 	public static void main(String[] args) {
@@ -15,17 +15,17 @@ public class Program {
 
 		Scanner sc = new Scanner(System.in);
 
-		System.out.print("\nHow many Contributors to add? ");
-		int numberOfContributors = sc.nextInt();
+		System.out.print("\nHow many Tax Payers to add? ");
+		int numberOfTaxPayers = sc.nextInt();
 		sc.nextLine(); // buffer clean
 		System.out.println();
 
 		// Contributor List
-		List<Contributor> contributors = new ArrayList<>();
+		List<TaxPayer> contributors = new ArrayList<>();
 
-		for (int i = 0; i < numberOfContributors; i++) {
-			System.out.printf("Enter #%d Contributor data%n", i + 1);
-			System.out.print("Contributor Type (n, c)?: ");
+		for (int i = 0; i < numberOfTaxPayers; i++) {
+			System.out.printf("Enter #%d Tax Payer data%n", i + 1);
+			System.out.print("Tax Payer Type (i, c)?: ");
 			char contributorType = sc.next().charAt(0);
 			sc.nextLine(); // buffer clean
 
@@ -35,13 +35,13 @@ public class Program {
 			Double annualIncome = sc.nextDouble();
 			sc.nextLine(); // buffer clean
 
-			Contributor contributor = null;
+			TaxPayer contributor = null;
 			switch (contributorType) {
-			case 'n': {
+			case 'i': {
 				System.out.print("Health Expenses: ");
 				Double healthExpenses = sc.nextDouble();
 
-				contributor = new NaturalPerson(contributorName, annualIncome, healthExpenses);
+				contributor = new Individual(contributorName, annualIncome, healthExpenses);
 				break;
 			}
 			case 'c': {
@@ -60,17 +60,17 @@ public class Program {
 		}
 
 		System.out.println();
-		System.out.println("CONTRIBUTORS:");
+		System.out.println("TAXES PAIED:");
 		System.out.println();
 		Double totalCollectedTaxes = 0.0;
 
-		for (Contributor c : contributors) {
-			c.printMyInfo();
+		for (TaxPayer c : contributors) {
+			System.out.printf(c.getName(), " :", c.totalTaxesToPay(), " €");
 			totalCollectedTaxes += c.totalTaxesToPay();
 			System.out.println();
 		}
 		
-
+		System.out.println();
 		System.out.printf("Total Collected Taxes: %.2f", totalCollectedTaxes);		
 
 		sc.close();

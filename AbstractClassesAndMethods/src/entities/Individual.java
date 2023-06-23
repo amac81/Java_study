@@ -1,13 +1,13 @@
 package entities;
 
-public class NaturalPerson extends Contributor {
+public class Individual extends TaxPayer {
 	private Double healthExpenses;
 
-	public NaturalPerson() {
+	public Individual() {
 
 	}
 
-	public NaturalPerson(String name, Double annualIncome, Double healthExpenses) {
+	public Individual(String name, Double annualIncome, Double healthExpenses) {
 		super(name, annualIncome);
 		this.healthExpenses = healthExpenses;
 	}
@@ -34,12 +34,6 @@ public class NaturalPerson extends Contributor {
 		return annualIncomeTaxes - deductibleHealthExpenses;
 	}
 
-	@Override
-	public void printMyInfo() {
-		System.out.println("# NATURAL PERSON #");
-		super.printGeneralInfo();
-		System.out.println("Health expenses: " + this.healthExpenses);
-	}
-
+	
 }
 

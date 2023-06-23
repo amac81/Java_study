@@ -1,6 +1,6 @@
 package entities;
 
-public class Company extends Contributor {
+public class Company extends TaxPayer {
 	private int numberOfWorkers;
 
 	public Company() {
@@ -28,13 +28,6 @@ public class Company extends Contributor {
 		Double annualIncomeTaxes = (numberOfWorkers > 10) ? annualIncome * 0.14 : annualIncome * 0.16;
 
 		return annualIncomeTaxes;
-	}
-
-	@Override
-	public void printMyInfo() {
-		System.out.println("# COMPANY #");
-		super.printGeneralInfo();
-		System.out.println("Number of workers: " + numberOfWorkers);
 	}
 
 }
