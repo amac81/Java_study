@@ -35,7 +35,7 @@ public class Program {
 
 			account.withDraw(withdrawAmount);
 
-			System.out.printf("New balance: %.2f", account.getBalance());
+			System.out.printf("New balance of your account: %.2f", account.getBalance());
 
 		} 
 		catch (BusinessException e) 
