@@ -99,7 +99,7 @@ public class Programa {
 	public static double percentagemComprasFeitas(List<String> listaComprasCliente, List<String> listaComprasFeitas)
 	{
 		int itemsIguais = comparaListas(listaComprasCliente, listaComprasFeitas);
-		//necessário cast da variável contafrutas para double, para o cálculo correto da percentagem
+		//necessário cast da variável itemsIguais para double, para o cálculo correto da percentagem
 		double percentagemFrutasIguais = (double) itemsIguais / listaComprasCliente.size() * 100;
 
 		return percentagemFrutasIguais;
