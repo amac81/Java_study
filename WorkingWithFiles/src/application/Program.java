@@ -37,16 +37,12 @@ public class Program {
 
 		//fileWriteExample(true);
 		
+		//folderListExample(strPath);
 		
-		folderListExample(strPath);
+		//fileListExample(strPath);
 		
-		System.out.println(".............................................................");
 		
-		fileListExample(strPath);
-		
-		System.out.println(".............................................................");
-		
-		boolean success = folderCreateExample(strPath, "subdir1");
+	/*	boolean success = folderCreateExample(strPath, "subdir1");
 		
 		if(success) {
 			System.out.println("Directory created sucessfully !");	
@@ -54,10 +50,26 @@ public class Program {
 		else {
 			System.out.println("Directory not created");
 		}
+		*/
+		
+			
+		filePathInfo(strPath);
+		
 		
 		sc.close();
 	}
 
+	public static void filePathInfo(String strPath) {
+		File path = new File(strPath);
+		
+		System.out.println("getName: " + path.getName());
+		System.out.println("getParent: " + path.getParent());
+		System.out.println("getPath: " + path.getPath());
+		
+		
+		
+	}
+	
 	
 	public static boolean folderCreateExample(String strPath, String dirName) {
 		return new File(strPath + "\\" + dirName).mkdir();
