@@ -10,15 +10,13 @@ import entities.Installment;
 public class ContractService {
 	private Contract contract;
 	private int numberOfMonths;
-	private List <Installment> installments;
-	
+		
 	private PaymentService paymentService;
 	
 	public ContractService(Contract contract, int numberOfMonths, PaymentService paymentService) {
 		this.contract = contract;
 		this.paymentService = paymentService;
 		this.numberOfMonths = numberOfMonths;
-		this.installments = new ArrayList <> ();
 	}
 	
 	private LocalDate nextMonthDate (LocalDate date, int months) {
@@ -39,14 +37,14 @@ public class ContractService {
 			LocalDate date = nextMonthDate(contract.getDate(), i+1);
 			Installment installment = new Installment(date, totalValue);
 			
-			installments.add(installment);
+			contract.getInstallments().add(installment);
 		}
 	}
 	
 	
 	public List <Installment> getInstallments(){
 		calcInstallments();
-		return installments;
+		return contract.getInstallments();
 	}
 	
 
