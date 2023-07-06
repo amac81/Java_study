@@ -1,6 +1,6 @@
 package entities.services;
 
-public class PaypalPayment implements PaymentService {
+public class PaypalService implements PaymentService {
 
 	@Override
 	public double interests(double amount, int months) {

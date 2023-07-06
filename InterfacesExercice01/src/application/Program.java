@@ -8,7 +8,7 @@ import java.util.Scanner;
 import entities.Contract;
 import entities.Installment;
 import entities.services.ContractService;
-import entities.services.PaypalPayment;
+import entities.services.PaypalService;
 
 public class Program {
 	public static void main(String[] args) {
@@ -33,7 +33,7 @@ public class Program {
 		int monthNumber = sc.nextInt();
 	
 		
-		ContractService contractService = new ContractService(new PaypalPayment());
+		ContractService contractService = new ContractService(new PaypalService());
 		
 		contractService.processContract(contract, monthNumber);
 		
