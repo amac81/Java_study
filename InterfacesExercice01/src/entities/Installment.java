@@ -9,6 +9,9 @@ public class Installment {
 	private LocalDate dueDate;
 	private double value;
 	
+	public Installment() {
+	}
+	
 	public Installment(LocalDate dueDate, double value) {
 		this.dueDate = dueDate;
 		this.value = value;

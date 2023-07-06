@@ -24,24 +24,26 @@ public class Program {
 		System.out.print("Date: ");
 		LocalDate date =  LocalDate.parse(sc.nextLine(), dataFormat1);
 		System.out.print("Total Value: ");
-		double contactTotalValue = sc.nextDouble();
+		double contractTotalValue = sc.nextDouble();
+		
+			
+		Contract contract = new Contract(contractNumber, date, contractTotalValue);
 		
 		System.out.print("Number of months of contract fractionation: ");
 		int monthNumber = sc.nextInt();
+	
 		
-		Contract contract = new Contract(contractNumber, date, contactTotalValue);
-		ContractService contractService = new ContractService(contract, monthNumber, new PaypalPayment());
+		ContractService contractService = new ContractService(new PaypalPayment());
+		
+		contractService.processContract(contract, monthNumber);
 		
 		System.out.println();
-		
 		System.out.println("INSTALLMENTS:");
 		
-		
-		for(Installment i: contractService.getInstallments()) {
+		for(Installment i: contract.getInstallments() ) {
 			System.out.println(i);
 		}
-		
-		
+
 		sc.close();
 	}
 

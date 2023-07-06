@@ -1,29 +1,23 @@
 package entities.services;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
-
 import entities.Contract;
 import entities.Installment;
 
 public class ContractService {
-	private Contract contract;
-	private int numberOfMonths;
 		
 	private PaymentService paymentService;
 	
-	public ContractService(Contract contract, int numberOfMonths, PaymentService paymentService) {
-		this.contract = contract;
+	public ContractService(PaymentService paymentService) {
 		this.paymentService = paymentService;
-		this.numberOfMonths = numberOfMonths;
 	}
 	
 	private LocalDate nextMonthDate (LocalDate date, int months) {
 		return date.plusMonths(months);
 	}
 	
-	private void calcInstallments() {
+	public void processContract(Contract contract, int numberOfMonths) {
 		double partialValue = contract.getTotal() / numberOfMonths;
 		double interests;
 		double payRate;
@@ -41,11 +35,4 @@ public class ContractService {
 		}
 	}
 	
-	
-	public List <Installment> getInstallments(){
-		calcInstallments();
-		return contract.getInstallments();
-	}
-	
-
 }
