@@ -11,7 +11,9 @@ import model.entities.MultifunctionDevice;
  * A class can implement more than one interface.
  * 
  * This example does not represent multiple inheritance!
- * There is no reuse in the relationship between the MultifunctionDevice class and the Scanner and Printer interfaces. 	
+ * There is no reuse in the relationship between the MultifunctionDevice class and the Scanner and Printer interfaces.
+ * 
+ * MultifunctionDevice does not inherit, but rather implements the interfaces (fulfills the contract established by them)
  * 
  * */
 
