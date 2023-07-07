@@ -1,8 +1,8 @@
 package model.entities;
 
-public class Employee {
+public class Employee implements Comparable <Employee> {
 	private String name;
-	private double salary;
+	private Double salary;
 	
 	public Employee() {}
 	
@@ -19,17 +19,34 @@ public class Employee {
 		this.name = name;
 	}
 
-	public double getSalary() {
+	public Double getSalary() {
 		return salary;
 	}
 
-	public void setSalary(double salary) {
+	public void setSalary(Double salary) {
 		this.salary = salary;
 	}
 
 	@Override
 	public String toString() {
 		return name + ", " + String.format("%.2f", salary);
+	}
+
+
+	@Override
+	public int compareTo(Employee other) 
+	{
+		//ASC
+		//return salary.compareTo(other.getSalary());
+
+		//DESC
+		//return -salary.compareTo(other.getSalary());
+
+		//A-Z
+		//return name.compareTo(other.getName());
+		
+		//Z-A
+		return -name.compareTo(other.getName());
 	}
 	
 	

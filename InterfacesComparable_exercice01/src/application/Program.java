@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
@@ -24,16 +25,16 @@ public class Program
 
 			while (fileLine != null) {
 				
-				String [] lines = fileLine.split(",");
+				String [] fields = fileLine.split(",");
 				
-				Employee employee = new Employee(lines[0], Double.parseDouble(lines[1]));
+				Employee employee = new Employee(fields[0], Double.parseDouble(fields[1]));
 				
 				employees.add(employee);
 				
 				fileLine = br.readLine();
 			}
 			
-			//Collections.sort(names);
+			Collections.sort(employees);
 			
 			for(Employee e: employees) {
 				System.out.println(e);
