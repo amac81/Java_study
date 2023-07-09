@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import application.services.CalculationService;
 import entities.Product;
+import services.CalculationService;
 
 public class Program {
 
