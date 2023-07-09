@@ -19,7 +19,7 @@ public class Program {
 
 		fileProcess(filePath);
 
-		sc.close();
+			sc.close();
 	}
 
 	private static String transformLine(String line) {
