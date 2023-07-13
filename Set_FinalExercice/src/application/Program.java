@@ -43,7 +43,7 @@ public class Program {
 		}
 	
 		
-		Set <Integer> setAllStudents = new TreeSet <> (setCourseAStudents);
+		Set <Integer> setAllStudents = new HashSet <> (setCourseAStudents);
 		
 
 		//Union
