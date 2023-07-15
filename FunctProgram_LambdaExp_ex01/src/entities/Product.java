@@ -33,6 +33,10 @@ public class Product implements Comparable <Product>{
 		return "Product [name=" + name + ", price=" + price + "]";
 	}
 
+	/*
+	 * if the ordering logic changes, we have to change the Product class.. This is undesirable.
+	 * */
+	
 	@Override
 	public int compareTo(Product other) {
 		return price.compareTo(other.getPrice());
