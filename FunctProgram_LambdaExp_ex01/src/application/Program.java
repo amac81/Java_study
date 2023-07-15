@@ -16,7 +16,8 @@ public class Program {
 		products.add(new Product("Ipad", 1724.02));
 		products.add(new Product("Tablet", 890.32));
 		
-		Collections.sort(products);
+		products.sort( new MyComparator());
+		
 		
 		for(Product p: products) {
 			System.out.println(p);

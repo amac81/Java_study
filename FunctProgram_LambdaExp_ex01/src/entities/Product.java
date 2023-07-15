@@ -1,6 +1,6 @@
 package entities;
 
-public class Product implements Comparable <Product>{
+public class Product{
 	public String name;
 	public Double price;
 
@@ -20,7 +20,7 @@ public class Product implements Comparable <Product>{
 		this.name = name;
 	}
 
-	public double getPrice() {
+	public Double getPrice() {
 		return price;
 	}
 
@@ -33,13 +33,5 @@ public class Product implements Comparable <Product>{
 		return "Product [name=" + name + ", price=" + price + "]";
 	}
 
-	/*
-	 * if the ordering logic changes, we have to change the Product class.. This is undesirable.
-	 * */
-	
-	@Override
-	public int compareTo(Product other) {
-		return price.compareTo(other.getPrice());
-	}
 
 }
