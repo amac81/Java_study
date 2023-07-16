@@ -17,9 +17,9 @@ public class Program {
 		products.add(new Product("Tablet", 890.32));
 		
 		//with lambda expression (anonimous function)
-		Comparator<Product> comp = (p1, p2) -> {
-			return p1.getPrice().compareTo(p2.getPrice());
-		};
+		//simplified to just 1 line
+		Comparator<Product> comp = (p1, p2) -> p1.getPrice().compareTo(p2.getPrice());
+
 		
 		products.sort(comp);
 		
