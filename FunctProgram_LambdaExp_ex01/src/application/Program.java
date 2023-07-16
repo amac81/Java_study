@@ -16,14 +16,9 @@ public class Program {
 		products.add(new Product("Ipad", 1724.02));
 		products.add(new Product("Tablet", 890.32));
 		
-		//with anonimous class
-		Comparator<Product> comp = new Comparator<Product> () {
-
-			@Override
-			public int compare(Product p1, Product p2) {
-				return p1.getPrice().compareTo(p2.getPrice());
-			}
-			
+		//with lambda expression (anonimous function)
+		Comparator<Product> comp = (p1, p2) -> {
+			return p1.getPrice().compareTo(p2.getPrice());
 		};
 		
 		products.sort(comp);
