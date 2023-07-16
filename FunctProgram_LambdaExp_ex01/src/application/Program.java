@@ -1,7 +1,7 @@
 package application;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import entities.Product;
@@ -16,7 +16,17 @@ public class Program {
 		products.add(new Product("Ipad", 1724.02));
 		products.add(new Product("Tablet", 890.32));
 		
-		products.sort( new MyComparator());
+		//with anonimous class
+		Comparator<Product> comp = new Comparator<Product> () {
+
+			@Override
+			public int compare(Product p1, Product p2) {
+				return p1.getPrice().compareTo(p2.getPrice());
+			}
+			
+		};
+		
+		products.sort(comp);
 		
 		
 		for(Product p: products) {
