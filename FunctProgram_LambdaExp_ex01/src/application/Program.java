@@ -16,12 +16,9 @@ public class Program {
 		products.add(new Product("Ipad", 1724.02));
 		products.add(new Product("Tablet", 890.32));
 		
-		//with lambda expression (anonimous function)
-		//simplified to just 1 line
-		Comparator<Product> comp = (p1, p2) -> p1.getPrice().compareTo(p2.getPrice());
-
-		
-		products.sort(comp);
+	
+		//final comparator
+		products.sort((p1, p2) -> p1.getPrice().compareTo(p2.getPrice()));
 		
 		
 		for(Product p: products) {
