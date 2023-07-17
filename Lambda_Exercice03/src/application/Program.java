@@ -41,14 +41,13 @@ public class Program {
 			
 			//file was read to employees list
 			
-			Comparator <String> myEmailComp = (s1, s2) -> s1.toUpperCase().compareTo(s2.toUpperCase());
 			
 			//pipeline: emails of employees whose salary is more than...			
 			List<String> employeesEmails = employees.stream()
 					.filter(e -> e.getsalary() > salary)
 					 //new stream with emails
 					.map(e -> e.getEmail())
-					.sorted(myEmailComp)
+					.sorted()
 					//convert Stream to List
 					.collect(Collectors.toList()); 
 			
