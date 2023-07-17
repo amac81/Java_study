@@ -45,16 +45,17 @@ public class Program {
 					.reduce(0.0, (x, y) -> x + y) / products.size();
 			
 			System.out.println("Average price: " + String.format("%.2f", avg));
-			
-			Comparator<String>  =  (s1, s2) -> s2.toUpperCase().compareTo(s1.toUpperCase());
+
+			//ascending order (A to Z) comparator
+			Comparator<String> myStrComp =  (s1, s2) -> s1.toUpperCase().compareTo(s2.toUpperCase());
 			
 			//products with price lower than avg
 			List<String> productNames = products.stream()
 					.filter(p -> p.getPrice() < avg)
 					 //new stream with names
 					.map(p -> p.getName())
-					//descending order (Z to A)
-					.sorted(myStrComp)
+					//descending order (Z to A), using reversed
+					.sorted(myStrComp.reversed())
 					.collect(Collectors.toList());
 			
 			for(String s: productNames) {
