@@ -20,7 +20,7 @@ public class Program {
 
 		String filePath;
 
-		System.out.print("Enter file path: ");
+		System.out.print("Enter full file path: ");
 		filePath = sc.nextLine();
 
 		try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
@@ -36,30 +36,33 @@ public class Program {
 				fileLine = br.readLine();
 			}
 
+			System.out.print("Enter salary: ");
+			Double salary = sc.nextDouble();
 			
-			//file was read to products list
+			//file was read to employees list
 			
-			//pipeline
-			double avg = products.stream()
-					.map(p -> p.getPrice())
-					.reduce(0.0, (x, y) -> x + y) / products.size();
+			Comparator <String> myEmailComp = (s1, s2) -> s1.toUpperCase().compareTo(s2.toUpperCase());
 			
-			System.out.println("Average price: " + String.format("%.2f", avg));
-
-			//ascending order (A to Z) comparator
-			Comparator<String> myStrComp =  (s1, s2) -> s1.toUpperCase().compareTo(s2.toUpperCase());
-			
-			//products with price lower than avg
-			List<String> productNames = products.stream()
-					.filter(p -> p.getPrice() < avg)
-					 //new stream with names
-					.map(p -> p.getName())
-					//descending order (Z to A), using reversed
-					.sorted(myStrComp.reversed())
+			//pipeline: emails of employees whose salary is more than...			
+			List<String> employeesEmails = employees.stream()
+					.filter(e -> e.getsalary() > salary)
+					 //new stream with emails
+					.map(e -> e.getEmail())
+					.sorted(myEmailComp)
 					//convert Stream to List
 					.collect(Collectors.toList()); 
 			
-			productNames.forEach(System.out::println);
+			//pipeline: sum of salary of people whose name starts with 'M'			
+			Double sum = employees.stream()
+					.filter(e -> e.getName().charAt(0) == 'M')
+					.map(e -> e.getsalary())
+					.reduce(0.0, (x,y) -> x + y);
+			
+			System.out.println("Email of people whose salary is more than " + String.format("%.2f", salary));
+			employeesEmails.forEach(System.out::println); 
+			
+			System.out.println("Sum of salary of people whose name starts with 'M': " + String.format("%.2f", sum));
+
 
 		} catch (IOException e) {
 			System.out.println("Error: " + e.getMessage());
