@@ -10,14 +10,11 @@ import db.DB;
 
 public class Program {
 	public static void main(String[] args) throws SQLException {
-		
 
 		queryExample();
 
-		
-
 	}
-	
+
 	private static void queryExample() {
 		Connection dbConnection = null;
 		Statement st = null;
@@ -26,8 +23,8 @@ public class Program {
 			dbConnection = DB.getDbConnection();
 			st = dbConnection.createStatement();
 			rs = st.executeQuery("SELECT * FROM department");
-			
-			while(rs.next()) {
+
+			while (rs.next()) {
 				System.out.println(rs.getInt("Id") + ", " + rs.getString("Name"));
 			}
 
