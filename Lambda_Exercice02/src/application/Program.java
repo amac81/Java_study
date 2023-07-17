@@ -56,11 +56,10 @@ public class Program {
 					.map(p -> p.getName())
 					//descending order (Z to A), using reversed
 					.sorted(myStrComp.reversed())
-					.collect(Collectors.toList());
+					//convert Stream to List
+					.collect(Collectors.toList()); 
 			
-			for(String s: productNames) {
-				System.out.println(s);
-			}
+			productNames.forEach(System.out::println);
 
 		} catch (IOException e) {
 			System.out.println("Error: " + e.getMessage());
