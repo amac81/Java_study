@@ -10,12 +10,18 @@ import db.DB;
 
 public class Program {
 	public static void main(String[] args) throws SQLException {
-		Locale.setDefault(Locale.US);
+		
 
+		queryExample();
+
+		
+
+	}
+	
+	private static void queryExample() {
 		Connection dbConnection = null;
 		Statement st = null;
 		ResultSet rs = null;
-
 		try {
 			dbConnection = DB.getDbConnection();
 			st = dbConnection.createStatement();
@@ -28,10 +34,9 @@ public class Program {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			rs.close();
-			st.close();
+			DB.closeResultSet(rs);
+			DB.closeStatement(st);
 			DB.closeConnection();
 		}
-
 	}
 }
