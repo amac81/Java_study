@@ -11,19 +11,48 @@ import java.text.SimpleDateFormat;
 import db.DB;
 
 public class Program {
+	
+	public static SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy");
+	
 	public static void main(String[] args) throws SQLException {
 
 		// queryDepartments();
 		//sellerInsert();
-		departmentsInsert();
+		//departmentsInsert();
+		updateSeller();
 
 	}
 
+	private static void updateSeller() {
+		Connection dbConnection = null;
+		PreparedStatement st = null;
+		ResultSet rs = null;
+		try {
+			dbConnection = DB.getDbConnection();
+			st = dbConnection.prepareStatement("UPDATE seller "
+					+ "SET BaseSalary = BaseSalary + ? "
+					+ "WHERE "
+					+ "(DepartmentId = ?)");
+			
+			st.setDouble(1, 200.00); //increase salary by 200.00
+			st.setInt(2, 2);
+			
+			int rowsAffected = st.executeUpdate();
+		
+			System.out.println("Done! Rows Affected: " + rowsAffected);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DB.closeResultSet(rs);
+			DB.closeStatement(st);
+			DB.closeConnection();
+		}
+	}
+	
 	private static void sellerInsert() {
 		Connection dbConnection = null;
 		PreparedStatement st = null;
-		SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy");
-
 		try {
 			dbConnection = DB.getDbConnection();
 			st = dbConnection.prepareStatement("INSERT INTO seller "
@@ -53,6 +82,7 @@ public class Program {
 		}
 	}
 
+	//insertion with id retrieval
 	private static void departmentsInsert() {
 		Connection dbConnection = null;
 		PreparedStatement st = null;
