@@ -1,6 +1,5 @@
 package application;
 
-import java.sql.Connection;
 import java.sql.SQLException;
 
 import db.DB;
@@ -14,8 +13,8 @@ public class Program {
 	
 	public static void main(String[] args) throws SQLException {
 		
-		Connection dbConnection = DB.getDbConnection();
-		SellerDao sellerDao = DaoFactory.createSellerDao(dbConnection);
+		
+		SellerDao sellerDao = DaoFactory.createSellerDao();
 		
 		Seller seller = sellerDao.findById(1);
 		
