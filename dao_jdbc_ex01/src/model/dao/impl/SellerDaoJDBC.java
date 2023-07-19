@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.List;
@@ -16,8 +15,10 @@ import model.entities.Seller;
 
 public class SellerDaoJDBC implements SellerDao {
 	private static SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy");
+	private Connection dbConnection;
 
-	public SellerDaoJDBC() {
+	public SellerDaoJDBC(Connection dbConnection) {
+		this.dbConnection = dbConnection;
 	}
 
 	@Override
@@ -40,12 +41,12 @@ public class SellerDaoJDBC implements SellerDao {
 
 	@Override
 	public Seller findById(Integer id) {
-		Connection dbConnection = null;
+		
 		PreparedStatement st = null;
 		Seller seller = null;
 		ResultSet rs = null;
 		try {
-			dbConnection = DB.getDbConnection();
+
 			st = dbConnection.prepareStatement(
 					"SELECT seller.*,department.Name as DepartmentName " + "FROM seller INNER JOIN department "
 							+ "ON seller.DepartmentId = department.Id " + "WHERE seller.Id = ?");
@@ -72,7 +73,6 @@ public class SellerDaoJDBC implements SellerDao {
 		} finally {
 			DB.closeResultSet(rs);
 			DB.closeStatement(st);
-			DB.closeConnection();
 		}
 
 		return seller;
