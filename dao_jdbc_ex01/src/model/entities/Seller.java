@@ -2,9 +2,12 @@ package model.entities;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 public class Seller implements Serializable {
+	public static DateTimeFormatter dateTimeFmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+	
 	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private String name;
@@ -93,7 +96,7 @@ public class Seller implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Seller [id=" + id + ", name=" + name + ", email=" + email + ", birthDate=" + birthDate + ", baseSalary="
+		return "Seller [id=" + id + ", name=" + name + ", email=" + email + ", birthDate=" + birthDate.format(dateTimeFmt) + ", baseSalary="
 				+ baseSalary + ", department=" + department + "]";
 	}
 

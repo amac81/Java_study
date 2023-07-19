@@ -7,6 +7,10 @@ import model.entities.Department;
 
 public class DepartmentDaoJDBC implements DepartmentDao{
 
+	public DepartmentDaoJDBC() {
+		
+	}
+	
 	@Override
 	public void insert(Department department) {
 		// TODO Auto-generated method stub
