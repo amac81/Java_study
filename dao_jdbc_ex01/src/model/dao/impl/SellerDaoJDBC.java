@@ -56,13 +56,13 @@ public class SellerDaoJDBC implements SellerDao {
 			rs = st.executeQuery();
 			
 			if (rs.next()) {
-				Integer sellerId = rs.getInt(1);
-				String sellerName = rs.getString(2);
-				String sellerEmail = rs.getString(3);
-				LocalDate sellerBirthDate = rs.getDate(4).toLocalDate();
-				Double sellerBaseSalary = rs.getDouble(5);
-				Integer departmentId = rs.getInt(6);
-				String departmentName = rs.getString(7);
+				Integer sellerId = rs.getInt("Id");
+				String sellerName = rs.getString("Name");
+				String sellerEmail = rs.getString("Email");
+				LocalDate sellerBirthDate = rs.getDate("BirthDate").toLocalDate();
+				Double sellerBaseSalary = rs.getDouble("BaseSalary");
+				Integer departmentId = rs.getInt("DepartmentId");
+				String departmentName = rs.getString("DepartmentName");
 
 				Department department = new Department(departmentId, departmentName);
 				seller = new Seller (sellerId, sellerName, sellerEmail, sellerBirthDate,
