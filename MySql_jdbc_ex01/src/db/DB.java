@@ -9,6 +9,17 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Properties;
 
+/*
+ * db.properties
+ * 
+ * user=developer
+password=12345678#
+dburl=jdbc:mysql://localhost:3306/coursejdbc
+useSSL=false
+
+ * */
+
+
 public class DB {
 	private static Connection dbConnection = null;
 

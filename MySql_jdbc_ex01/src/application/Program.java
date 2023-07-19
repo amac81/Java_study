@@ -9,6 +9,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import db.DB;
+import db.DbException;
 import db.DbIntegrityException;
 
 public class Program {
@@ -21,10 +22,56 @@ public class Program {
 		//sellerInsert();
 		//departmentsInsert();
 		//updateSeller();
-		deleteDepartment();
+		//deleteDepartment();
+		
+		transactionalSellerUpdate();
 
 	}
 
+	
+	private static void transactionalSellerUpdate() {
+		Connection dbConnection = null;
+		Statement st = null;
+		try {
+			dbConnection = DB.getDbConnection();
+			
+			dbConnection.setAutoCommit(false);
+			st = dbConnection.createStatement();
+			
+			int rowsAffected1 = st.executeUpdate("UPDATE seller "
+					+ "SET BaseSalary = 2090 "
+					+ "WHERE DepartmentId = 1");
+			
+			//error simulation
+			/*int x =1;
+			if(x<2) {
+				throw new SQLException("Fake error");
+			}*/
+			
+			int rowsAffected2 = st.executeUpdate("UPDATE seller "
+					+ "SET BaseSalary = 3090 "
+					+ "WHERE DepartmentId = 2");
+		
+			
+			dbConnection.commit();
+			
+			System.out.println("Done! Rows1 Affected: " + rowsAffected1);
+			System.out.println("Done! Rows2 Affected: " + rowsAffected2);
+			
+		} catch (SQLException e) {
+			try {
+				dbConnection.rollback();
+			} catch (SQLException e1) {
+				throw new DbException(e1.getMessage());
+			}
+			
+			e.printStackTrace();
+		} finally {
+			DB.closeStatement(st);
+			DB.closeConnection();
+		}
+	}
+	
 	private static void deleteDepartment() {
 		Connection dbConnection = null;
 		PreparedStatement st = null;
