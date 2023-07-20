@@ -78,8 +78,6 @@ public class SellerDaoJDBC implements SellerDao {
 	public void update(Seller seller) {
 		PreparedStatement st = null;
 		try {
-			dbConnection = DB.getDbConnection();
-			dbConnection.setAutoCommit(false);
 			st = dbConnection.prepareStatement(
 					"UPDATE seller "
 					+ "SET Name=?,Email=?,BirthDate=?,BaseSalary=?,DepartmentId=? "

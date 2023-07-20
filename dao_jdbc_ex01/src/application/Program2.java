@@ -33,17 +33,19 @@ public class Program2 {
 		System.out.println("New department Inserted, id: " + department.getId());
 		System.out.println("------------------------------------------------------");
 
+		System.out.println("######## DepartmentDao.update TEST ########");
+		department = departmentDao.findById(5);
+		department.setName("House and Garden");
+		departmentDao.update(department);		
+		System.out.println("Department update complete!");
+		System.out.println("------------------------------------------------------");
+
 		/*
 		 * 
 		 * 
 		 * 
 		 * 
 		 * 
-		 * System.out.println("######## SellerDao.update TEST ########"); seller =
-		 * sellerDao.findById(14); seller.setName("Marina Brown");
-		 * seller.setBaseSalary(2333.22); sellerDao.update(seller);
-		 * System.out.println("Seller update complete!");
-		 * System.out.println("------------------------------------------------------");
 		 * 
 		 * System.out.println("######## DepartmentDao.deleteById TEST ########");
 		 * departmentDao.deleteById(19); System.out.println("Delete completeted !");
