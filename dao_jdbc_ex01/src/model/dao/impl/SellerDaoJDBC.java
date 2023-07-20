@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -38,7 +39,7 @@ public class SellerDaoJDBC implements SellerDao {
 			st = dbConnection.prepareStatement(
 					"INSERT INTO seller "
 					+ "(Name,Email,BirthDate,BaseSalary,DepartmentId) "
-					+ "VALUES(?,?,?,?,?)");
+					+ "VALUES(?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
 			
 			st.setString(1, seller.getName());
 			st.setString(2, seller.getEmail());
@@ -51,6 +52,12 @@ public class SellerDaoJDBC implements SellerDao {
 			
 			int rowsAffected = st.executeUpdate();
 			
+			if(rowsAffected > 0) {
+				ResultSet rs = st.getGeneratedKeys();
+				int id = rs.getInt(1); //1st column
+				seller.setId(id);
+			}
+						
 			dbConnection.commit();
 			
 			System.out.println("Done! Rows Affected: " + rowsAffected);	
