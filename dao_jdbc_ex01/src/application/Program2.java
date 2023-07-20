@@ -1,6 +1,8 @@
 package application;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import db.DB;
 import model.dao.DaoFactory;
@@ -13,21 +15,20 @@ public class Program2 {
 	public static void main(String[] args) throws SQLException {
 
 		DepartmentDao departmentDao = DaoFactory.createDepartmentDao();
-		
-		  System.out.println("######## DepartmentDao.findById TEST ########"); 
-		  Department department = departmentDao.findById(1); 
-		  System.out.println(department);
-		  System.out.println("------------------------------------------------------");
-		 
-		 /* 
-		 * System.out.println("######## SellerDao.findByDepartment TEST ########"); List
-		 * <Seller> sellersList = sellerDao.findByDepartment(new Department(1, null));
-		 * System.out.println(sellersList);
-		 * System.out.println("------------------------------------------------------");
+
+		System.out.println("######## DepartmentDao.findById TEST ########");
+		Department department = departmentDao.findById(1);
+		System.out.println(department);
+		System.out.println("------------------------------------------------------");
+
+		System.out.println("######## DepartmentDao.findAll TEST ########");
+		List <Department> departmentsList = new ArrayList<> ();
+		departmentsList = departmentDao.findAll();
+		System.out.println(departmentsList);
+		System.out.println("------------------------------------------------------");
+
+		/*
 		 * 
-		 * System.out.println("######## SellerDao.findAll TEST ########"); sellersList =
-		 * sellerDao.findAll(); System.out.println(sellersList);
-		 * System.out.println("------------------------------------------------------");
 		 * 
 		 * System.out.println("######## SellerDao.insert TEST ########"); LocalDate
 		 * birthDate = LocalDate.parse("16/07/1978", dateTimeFmt); seller = new
@@ -42,12 +43,11 @@ public class Program2 {
 		 * seller.setBaseSalary(2333.22); sellerDao.update(seller);
 		 * System.out.println("Seller update complete!");
 		 * System.out.println("------------------------------------------------------");
-		
-		System.out.println("######## DepartmentDao.deleteById TEST ########");
-		departmentDao.deleteById(19);
-		System.out.println("Delete completeted !");
-		System.out.println("------------------------------------------------------");
- */
+		 * 
+		 * System.out.println("######## DepartmentDao.deleteById TEST ########");
+		 * departmentDao.deleteById(19); System.out.println("Delete completeted !");
+		 * System.out.println("------------------------------------------------------");
+		 */
 
 		DB.closeConnection();
 
