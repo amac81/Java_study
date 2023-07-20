@@ -1,6 +1,8 @@
 package application;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import db.DB;
@@ -14,7 +16,8 @@ public class Program {
 	
 	
 	public static void main(String[] args) throws SQLException {
-		
+		final DateTimeFormatter dateTimeFmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
 		
 		SellerDao sellerDao = DaoFactory.createSellerDao();
 		
@@ -32,6 +35,18 @@ public class Program {
 		sellersList = sellerDao.findAll();
 		System.out.println(sellersList);
 		System.out.println("------------------------------------------------------");
+		
+		System.out.println("######## SellerDao.insert TEST ########");
+		LocalDate birthDate = LocalDate.parse("16/07/1978", dateTimeFmt);
+		seller = new Seller(null, "David Miami", "david@gmail.com", birthDate, 8750.00, new Department(3, null));
+		
+		sellerDao.insert(seller);
+		
+		sellersList = sellerDao.findAll();
+		
+		System.out.println(sellersList);
+		System.out.println("------------------------------------------------------");
+		
 		
 		
 		DB.closeConnection();

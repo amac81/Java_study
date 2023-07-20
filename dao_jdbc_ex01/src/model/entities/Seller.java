@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 public class Seller implements Serializable {
-	public static DateTimeFormatter dateTimeFmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+	private static DateTimeFormatter dateTimeFmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 	
 	private static final long serialVersionUID = 1L;
 	private Integer id;

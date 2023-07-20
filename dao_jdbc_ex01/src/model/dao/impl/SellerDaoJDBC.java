@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,6 +19,8 @@ import model.entities.Department;
 import model.entities.Seller;
 
 public class SellerDaoJDBC implements SellerDao {
+	private static SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
+
 	private Connection dbConnection;
 
 	public SellerDaoJDBC(Connection dbConnection) {
@@ -25,8 +29,47 @@ public class SellerDaoJDBC implements SellerDao {
 
 	@Override
 	public void insert(Seller seller) {
-		// TODO Auto-generated method stub
+		PreparedStatement st = null;
+		try {
+			dbConnection = DB.getDbConnection();
+			
+			dbConnection.setAutoCommit(false);
+			
+			st = dbConnection.prepareStatement(
+					"INSERT INTO seller "
+					+ "(Name,Email,BirthDate,BaseSalary,DepartmentId) "
+					+ "VALUES(?,?,?,?,?)");
+			
+			st.setString(1, seller.getName());
+			st.setString(2, seller.getEmail());
 
+			long longDate = fmt.parse(seller.getBirthDate().toString()).getTime();
+			
+			st.setDate(3, new java.sql.Date(longDate));
+			st.setDouble(4, seller.getBaseSalary());
+			st.setInt(5, seller.getDepartment().getId());			
+			
+			int rowsAffected = st.executeUpdate();
+			
+			dbConnection.commit();
+			
+			System.out.println("Done! Rows Affected: " + rowsAffected);	
+
+		}
+		catch (SQLException e) 
+		{
+			try {
+				dbConnection.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			} 
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		finally 
+		{
+			DB.closeStatement(st);
+		}
 	}
 
 	@Override
