@@ -21,12 +21,13 @@ import model.entities.Department;
 import model.entities.Seller;
 
 public class SellerDaoJDBC implements SellerDao {
-	private static SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
+	private static SimpleDateFormat fmt;
 
 	private Connection dbConnection;
 
 	public SellerDaoJDBC(Connection dbConnection) {
 		this.dbConnection = dbConnection;
+		 fmt = new SimpleDateFormat("yyyy-MM-dd");
 	}
 
 	@Override
