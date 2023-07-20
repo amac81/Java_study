@@ -24,10 +24,14 @@ public class Program {
 		System.out.println("------------------------------------------------------");
 		
 		System.out.println("######## SellerDao.findByDepartment TEST ########");
-		List <Seller> sellersByDepartment = sellerDao.findByDepartment(new Department(1, null));
-		System.out.println(sellersByDepartment);
+		List <Seller> sellersList = sellerDao.findByDepartment(new Department(1, null));
+		System.out.println(sellersList);
 		System.out.println("------------------------------------------------------");
 
+		System.out.println("######## SellerDao.findAll TEST ########");
+		sellersList = sellerDao.findAll();
+		System.out.println(sellersList);
+		System.out.println("------------------------------------------------------");
 		
 		
 		DB.closeConnection();

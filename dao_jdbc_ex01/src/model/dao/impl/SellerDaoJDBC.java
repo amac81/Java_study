@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,7 +17,6 @@ import model.entities.Department;
 import model.entities.Seller;
 
 public class SellerDaoJDBC implements SellerDao {
-	private static SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy");
 	private Connection dbConnection;
 
 	public SellerDaoJDBC(Connection dbConnection) {
@@ -91,8 +89,44 @@ public class SellerDaoJDBC implements SellerDao {
 
 	@Override
 	public List<Seller> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		PreparedStatement st = null;
+		ResultSet rs = null;
+		try {
+
+			st = dbConnection.prepareStatement(
+							"SELECT seller.*,department.Name as DepartmentName " 
+							+ "FROM seller " 
+							+ "INNER JOIN department "
+							+ "ON seller.DepartmentId = department.Id " 
+							+ "ORDER BY Name");
+
+			rs = st.executeQuery();
+
+			List<Seller> departmentsList = new ArrayList<>();
+			Map <Integer, Department> departmentsMap = new HashMap<>();
+			
+			//rs may return 0 or more results
+			while (rs.next()) {
+				
+				//Use of Map to avoid incorrectly instantiating Departments. 
+				//Do not create a Department instance for each row of the ResultSet
+				Department dep = departmentsMap.get(rs.getInt("DepartmentId"));
+				if(dep == null) {
+					dep = instantiateDepartment(rs);
+					departmentsMap.put(rs.getInt("DepartmentId"), dep);
+				}
+				
+				departmentsList.add(instantiateSeller(rs, dep));
+			}
+
+			return departmentsList;
+
+		} catch (SQLException e) {
+			throw new DbException(e.getMessage());
+		} finally {
+			DB.closeResultSet(rs);
+			DB.closeStatement(st);
+		}
 	}
 
 	@Override
@@ -117,10 +151,7 @@ public class SellerDaoJDBC implements SellerDao {
 			List<Seller> departmentsList = new ArrayList<>();
 			Map <Integer, Department> departmentsMap = new HashMap<>();
 			
-			//rs may return 0 or more results
 			while (rs.next()) {
-				
-				//use of Map to avoid incorrectly instantiating Departments.
 				Department dep = departmentsMap.get(rs.getInt("DepartmentId"));
 				if(dep == null) {
 					dep = instantiateDepartment(rs);
