@@ -20,7 +20,7 @@ public class Program {
 
 		
 		SellerDao sellerDao = DaoFactory.createSellerDao();
-		
+	/*	
 		System.out.println("######## SellerDao.findById TEST ########");
 		Seller seller = sellerDao.findById(1);
 		System.out.println(seller);
@@ -49,8 +49,13 @@ public class Program {
 		seller.setName("Marina Brown");
 		seller.setBaseSalary(2333.22);
 		sellerDao.update(seller);
-		System.out.println("Seller update complete!");
+		System.out.println("Seller update complete!");		
+		System.out.println("------------------------------------------------------");
+*/
 		
+		System.out.println("######## SellerDao.deleteById TEST ########");
+		sellerDao.deleteById(19);
+		System.out.println("Delete completeted !");		
 		System.out.println("------------------------------------------------------");
 
 		
