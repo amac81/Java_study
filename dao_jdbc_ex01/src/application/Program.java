@@ -39,15 +39,20 @@ public class Program {
 		System.out.println("######## SellerDao.insert TEST ########");
 		LocalDate birthDate = LocalDate.parse("16/07/1978", dateTimeFmt);
 		seller = new Seller(null, "David Miami", "david@gmail.com", birthDate, 8750.00, new Department(3, null));
-		
 		sellerDao.insert(seller);
-		
-		sellersList = sellerDao.findAll();
-		
-		System.out.println(sellersList);
+		System.out.println("New seller Inserted, id: " + seller.getId());
 		System.out.println("------------------------------------------------------");
 		
 		
+		System.out.println("######## SellerDao.update TEST ########");
+		seller = sellerDao.findById(14);
+		seller.setName("Marina Brown");
+		seller.setBaseSalary(2333.22);
+		sellerDao.update(seller);
+		System.out.println("Seller update complete!");
+		
+		System.out.println("------------------------------------------------------");
+
 		
 		DB.closeConnection();
 	

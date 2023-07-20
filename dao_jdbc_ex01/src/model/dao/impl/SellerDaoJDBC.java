@@ -33,57 +33,90 @@ public class SellerDaoJDBC implements SellerDao {
 		PreparedStatement st = null;
 		try {
 			dbConnection = DB.getDbConnection();
-		
+
 			st = dbConnection.prepareStatement(
-					"INSERT INTO seller "
-					+ "(Name,Email,BirthDate,BaseSalary,DepartmentId) "
+					"INSERT INTO seller " 
+				    + "(Name,Email,BirthDate,BaseSalary,DepartmentId) " 
 					+ "VALUES(?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
-			
+
 			st.setString(1, seller.getName());
 			st.setString(2, seller.getEmail());
 
 			long longDate = fmt.parse(seller.getBirthDate().toString()).getTime();
-			
+
 			st.setDate(3, new java.sql.Date(longDate));
 			st.setDouble(4, seller.getBaseSalary());
-			st.setInt(5, seller.getDepartment().getId());			
-		
+			st.setInt(5, seller.getDepartment().getId());
+
 			int rowsAffected = st.executeUpdate();
-		
-			if(rowsAffected > 0) {
+
+			if (rowsAffected > 0) {
 				ResultSet rs = st.getGeneratedKeys();
-				if(rs.next()) {
-					int id = rs.getInt(1); //1st column
+				if (rs.next()) {
+					int id = rs.getInt(1); // 1st column
 					seller.setId(id);
 				}
 				DB.closeResultSet(rs);
-			}
-			else
-			{
+			} else {
 				throw new DbException("Unexpected error");
 			}
-						
-			System.out.println("Done! Rows Affected: " + rowsAffected);	
 
-		}
-		catch (SQLException e) 
-		{
+			System.out.println("Done! Rows Affected: " + rowsAffected);
+
+		} catch (SQLException e) {
 			throw new DbException(e.getMessage());
-		} 
-		catch (ParseException e) 
-		{
+		} catch (ParseException e) {
 			e.printStackTrace();
-		}
-		finally 
-		{
+		} finally {
 			DB.closeStatement(st);
 		}
 	}
 
 	@Override
 	public void update(Seller seller) {
-		// TODO Auto-generated method stub
+		PreparedStatement st = null;
+		try {
+			dbConnection = DB.getDbConnection();
+			dbConnection.setAutoCommit(false);
+			st = dbConnection.prepareStatement(
+					"UPDATE seller "
+					+ "SET Name=?,Email=?,BirthDate=?,BaseSalary=?,DepartmentId=? "
+					+ "WHERE Id=?", Statement.RETURN_GENERATED_KEYS);
 
+			st.setString(1, seller.getName());
+			st.setString(2, seller.getEmail());
+
+			long longDate = fmt.parse(seller.getBirthDate().toString()).getTime();
+
+			st.setDate(3, new java.sql.Date(longDate));
+			st.setDouble(4, seller.getBaseSalary());
+			st.setInt(5, seller.getDepartment().getId());
+			st.setInt(6, seller.getId());
+			
+			//error simulation
+			//int x =1;
+			//if(x<2) {
+			//	throw new SQLException("Fake error");
+			//}
+			
+			int rowsAffected = st.executeUpdate();
+			dbConnection.commit();
+
+			System.out.println("Done! Rows Affected: " + rowsAffected);
+
+		} catch (SQLException e) {
+			try {
+				dbConnection.rollback();
+			} catch (SQLException e1) {
+				throw new DbException(e1.getMessage());
+			}
+			
+			e.printStackTrace();
+		} catch (ParseException e) {
+			e.printStackTrace();
+		} finally {
+			DB.closeStatement(st);
+		}
 	}
 
 	@Override
@@ -100,8 +133,10 @@ public class SellerDaoJDBC implements SellerDao {
 		try {
 
 			st = dbConnection.prepareStatement(
-					"SELECT seller.*,department.Name as DepartmentName " + "FROM seller INNER JOIN department "
-							+ "ON seller.DepartmentId = department.Id " + "WHERE seller.Id = ?");
+						"SELECT seller.*,department.Name as DepartmentName " 
+						+ "FROM seller INNER JOIN department "
+						+ "ON seller.DepartmentId = department.Id " 
+						+ "WHERE seller.Id = ?");
 
 			st.setInt(1, id);
 
@@ -145,28 +180,28 @@ public class SellerDaoJDBC implements SellerDao {
 		try {
 
 			st = dbConnection.prepareStatement(
-							"SELECT seller.*,department.Name as DepartmentName " 
-							+ "FROM seller " 
-							+ "INNER JOIN department "
-							+ "ON seller.DepartmentId = department.Id " 
-							+ "ORDER BY Name");
+					"SELECT seller.*,department.Name as DepartmentName " 
+					+ "FROM seller "
+					+ "INNER JOIN department " 
+					+ "ON seller.DepartmentId = department.Id " 
+					+ "ORDER BY Name");
 
 			rs = st.executeQuery();
 
 			List<Seller> departmentsList = new ArrayList<>();
-			Map <Integer, Department> departmentsMap = new HashMap<>();
-			
-			//rs may return 0 or more results
+			Map<Integer, Department> departmentsMap = new HashMap<>();
+
+			// rs may return 0 or more results
 			while (rs.next()) {
-				
-				//Use of Map to avoid incorrectly instantiating Departments. 
-				//Do not create a Department instance for each row of the ResultSet
+
+				// Use of Map to avoid incorrectly instantiating Departments.
+				// Do not create a Department instance for each row of the ResultSet
 				Department dep = departmentsMap.get(rs.getInt("DepartmentId"));
-				if(dep == null) {
+				if (dep == null) {
 					dep = instantiateDepartment(rs);
 					departmentsMap.put(rs.getInt("DepartmentId"), dep);
 				}
-				
+
 				departmentsList.add(instantiateSeller(rs, dep));
 			}
 
@@ -189,8 +224,7 @@ public class SellerDaoJDBC implements SellerDao {
 
 			st = dbConnection.prepareStatement(
 							"SELECT seller.*,department.Name as DepartmentName " 
-							+ "FROM seller " 
-							+ "INNER JOIN department "
+							+ "FROM seller " + "INNER JOIN department "
 							+ "ON seller.DepartmentId = department.Id " 
 							+ "WHERE DepartmentId = ? " 
 							+ "ORDER BY Name");
@@ -200,15 +234,15 @@ public class SellerDaoJDBC implements SellerDao {
 			rs = st.executeQuery();
 
 			List<Seller> departmentsList = new ArrayList<>();
-			Map <Integer, Department> departmentsMap = new HashMap<>();
-			
+			Map<Integer, Department> departmentsMap = new HashMap<>();
+
 			while (rs.next()) {
 				Department dep = departmentsMap.get(rs.getInt("DepartmentId"));
-				if(dep == null) {
+				if (dep == null) {
 					dep = instantiateDepartment(rs);
 					departmentsMap.put(rs.getInt("DepartmentId"), dep);
 				}
-				
+
 				departmentsList.add(instantiateSeller(rs, dep));
 			}
 
