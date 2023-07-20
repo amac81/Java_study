@@ -22,20 +22,21 @@ public class Program2 {
 		System.out.println("------------------------------------------------------");
 
 		System.out.println("######## DepartmentDao.findAll TEST ########");
-		List <Department> departmentsList = new ArrayList<> ();
+		List<Department> departmentsList = new ArrayList<>();
 		departmentsList = departmentDao.findAll();
 		System.out.println(departmentsList);
+		System.out.println("------------------------------------------------------");
+
+		System.out.println("######## DepartmentDao.insert TEST ########");
+		department = new Department(null, "Garden");
+		departmentDao.insert(department);
+		System.out.println("New department Inserted, id: " + department.getId());
 		System.out.println("------------------------------------------------------");
 
 		/*
 		 * 
 		 * 
-		 * System.out.println("######## SellerDao.insert TEST ########"); LocalDate
-		 * birthDate = LocalDate.parse("16/07/1978", dateTimeFmt); seller = new
-		 * Seller(null, "David Miami", "david@gmail.com", birthDate, 8750.00, new
-		 * Department(3, null)); sellerDao.insert(seller);
-		 * System.out.println("New seller Inserted, id: " + seller.getId());
-		 * System.out.println("------------------------------------------------------");
+		 * 
 		 * 
 		 * 
 		 * System.out.println("######## SellerDao.update TEST ########"); seller =
