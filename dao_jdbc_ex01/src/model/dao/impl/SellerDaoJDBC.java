@@ -33,9 +33,7 @@ public class SellerDaoJDBC implements SellerDao {
 		PreparedStatement st = null;
 		try {
 			dbConnection = DB.getDbConnection();
-			
-			dbConnection.setAutoCommit(false);
-			
+		
 			st = dbConnection.prepareStatement(
 					"INSERT INTO seller "
 					+ "(Name,Email,BirthDate,BaseSalary,DepartmentId) "
@@ -49,28 +47,31 @@ public class SellerDaoJDBC implements SellerDao {
 			st.setDate(3, new java.sql.Date(longDate));
 			st.setDouble(4, seller.getBaseSalary());
 			st.setInt(5, seller.getDepartment().getId());			
-			
+		
 			int rowsAffected = st.executeUpdate();
-			
+		
 			if(rowsAffected > 0) {
 				ResultSet rs = st.getGeneratedKeys();
-				int id = rs.getInt(1); //1st column
-				seller.setId(id);
+				if(rs.next()) {
+					int id = rs.getInt(1); //1st column
+					seller.setId(id);
+				}
+				DB.closeResultSet(rs);
+			}
+			else
+			{
+				throw new DbException("Unexpected error");
 			}
 						
-			dbConnection.commit();
-			
 			System.out.println("Done! Rows Affected: " + rowsAffected);	
 
 		}
 		catch (SQLException e) 
 		{
-			try {
-				dbConnection.rollback();
-			} catch (SQLException e1) {
-				e1.printStackTrace();
-			} 
-		} catch (ParseException e) {
+			throw new DbException(e.getMessage());
+		} 
+		catch (ParseException e) 
+		{
 			e.printStackTrace();
 		}
 		finally 
