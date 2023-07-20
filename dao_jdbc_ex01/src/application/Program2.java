@@ -16,7 +16,7 @@ public class Program2 {
 
 		DepartmentDao departmentDao = DaoFactory.createDepartmentDao();
 
-		System.out.println("######## DepartmentDao.findById TEST ########");
+	/*	System.out.println("######## DepartmentDao.findById TEST ########");
 		Department department = departmentDao.findById(1);
 		System.out.println(department);
 		System.out.println("------------------------------------------------------");
@@ -39,18 +39,13 @@ public class Program2 {
 		departmentDao.update(department);		
 		System.out.println("Department update complete!");
 		System.out.println("------------------------------------------------------");
+*/
 
-		/*
-		 * 
-		 * 
-		 * 
-		 * 
-		 * 
-		 * 
-		 * System.out.println("######## DepartmentDao.deleteById TEST ########");
-		 * departmentDao.deleteById(19); System.out.println("Delete completeted !");
-		 * System.out.println("------------------------------------------------------");
-		 */
+		System.out.println("######## DepartmentDao.deleteById TEST ########");
+		departmentDao.deleteById(6); 
+		System.out.println("Delete completeted !");
+		System.out.println("------------------------------------------------------");
+		
 
 		DB.closeConnection();
 

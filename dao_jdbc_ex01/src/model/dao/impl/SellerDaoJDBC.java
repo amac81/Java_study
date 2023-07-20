@@ -34,7 +34,6 @@ public class SellerDaoJDBC implements SellerDao {
 	public void insert(Seller seller) {
 		PreparedStatement st = null;
 		try {
-			dbConnection = DB.getDbConnection();
 
 			st = dbConnection.prepareStatement(
 					"INSERT INTO seller " 
@@ -123,12 +122,15 @@ public class SellerDaoJDBC implements SellerDao {
 	public void deleteById(Integer id) {
 		PreparedStatement st = null;
 		try {
-			dbConnection = DB.getDbConnection();
 
 			st = dbConnection.prepareStatement(
 					"DELETE FROM seller WHERE Id = ?");
 			
 			st.setInt(1, id);
+			
+			int rowsAffected = st.executeUpdate();
+			
+			System.out.println("Done! Rows Affected: " + rowsAffected);
 			
 		} catch (SQLException e) {
 			throw new DbIntegrityException(e.getMessage());
@@ -136,7 +138,6 @@ public class SellerDaoJDBC implements SellerDao {
 		finally {
 			DB.closeStatement(st);
 		}
-
 	}
 
 	@Override
