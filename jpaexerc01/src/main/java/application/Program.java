@@ -14,13 +14,16 @@ public class Program {
 		
 		EntityManager em = emf.createEntityManager();
 		
-		
-		Person p1 = em.find(Person.class, 1);
-		
-		System.out.println(p1);
+		Person p = em.find(Person.class, 2);
+		//any operation other than a simple query needs to be transactional
+		em.getTransaction().begin();
+		em.remove(p);
+		em.getTransaction().commit();		
 		
 		em.close();
 		emf.close();
+		
+		System.out.println("Done");
  
 	}
 
